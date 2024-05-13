@@ -41,8 +41,6 @@ Cell["\<\
 Copy latest compilation of libCoolProp.dll to paclet directory\
 \>", "Text"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"Switch", "[",
   RowBox[{
@@ -57,8 +55,9 @@ Cell[BoxData[
          RowBox[{
           RowBox[{"FileNameSplit", "@",
            RowBox[{"NotebookDirectory", "[", "]"}]}], ",",
-          RowBox[{"-", "2"}]}], "]"}], ",", "\"\<build/libCoolProp.dll\>\""}],
-        "]"}], "]"}], ",", "\[IndentingNewLine]", "\t\t\t",
+          RowBox[{"-", "2"}]}], "]"}], ",",
+        "\"\<build_windows/libCoolProp.dll\>\""}], "]"}], "]"}], ",",
+     "\[IndentingNewLine]", "\t\t\t",
      RowBox[{"FileNameJoin", "[",
       RowBox[{"{",
        RowBox[{
@@ -87,10 +86,7 @@ Cell[BoxData[
         "\"\<CoolProp/LibraryResources/Linux-x86-64/libCoolProp.so\>\""}],
        "}"}], "]"}], ",",
      RowBox[{"OverwriteTarget", "->", "True"}]}], "]"}]}],
-  "\[IndentingNewLine]", "]"}]], "Input"]
-}]],
-
-Cell[CellGroupData[{
+  "\[IndentingNewLine]", "]"}]], "Input"],
 
 Cell[BoxData[{
  RowBox[{"Needs", "[", "\"\<PacletTools`\>\"", "]"}], "\n",
@@ -100,7 +96,6 @@ Cell[BoxData[{
     RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<CoolProp\>\""}], ",",
    RowBox[{"OverwriteTarget", " ", "->", " ", "True"}]}], " ",
   "]"}]}], "Input"]
-}]]
 }]]
 }]
 (* End of Notebook Content *)
