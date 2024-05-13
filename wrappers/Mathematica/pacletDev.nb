@@ -44,11 +44,11 @@ Copy latest compilation of libCoolProp.dll to paclet directory\
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"If", "[",
+ RowBox[{"Switch", "[",
   RowBox[{
-   RowBox[{"$SystemID", "==", "\"\<Windows-x86-64\>\""}], ",",
-   "\[IndentingNewLine]", "\t",
-   RowBox[{"CopyFile", "[", "\[IndentingNewLine]", "\t\t",
+  "$SystemID", ",", "\[IndentingNewLine]", "\t", "\"\<Windows-x86-64\>\"",
+   ",", "\[IndentingNewLine]", "\t\t",
+   RowBox[{"CopyFile", "[",
     RowBox[{
      RowBox[{"FileNameJoin", "[",
       RowBox[{"Append", "[",
@@ -58,16 +58,36 @@ Cell[BoxData[
           RowBox[{"FileNameSplit", "@",
            RowBox[{"NotebookDirectory", "[", "]"}]}], ",",
           RowBox[{"-", "2"}]}], "]"}], ",", "\"\<build/libCoolProp.dll\>\""}],
-        "]"}], "]"}], ",", "\[IndentingNewLine]", "\t\t",
+        "]"}], "]"}], ",", "\[IndentingNewLine]", "\t\t\t",
      RowBox[{"FileNameJoin", "[",
       RowBox[{"{",
        RowBox[{
         RowBox[{"NotebookDirectory", "[", "]"}], ",",
         "\"\<CoolProp/LibraryResources/Windows-x86-64/libCoolProp.dll\>\""}],
-       "}"}], "]"}], ",", "\[IndentingNewLine]", "\t\t",
-     RowBox[{"OverwriteTarget", " ", "->", " ", "True"}]}],
-    "\[IndentingNewLine]", "\t ", "]"}]}], "\[IndentingNewLine]",
-  "]"}]], "Input"]
+       "}"}], "]"}], ",",
+     RowBox[{"OverwriteTarget", "->", "True"}]}], "]"}], ",",
+   "\[IndentingNewLine]", "\t", "\"\<Linux-x86-64\>\"", ",",
+   "\[IndentingNewLine]", "\t\t",
+   RowBox[{"CopyFile", "[",
+    RowBox[{
+     RowBox[{"FileNameJoin", "[",
+      RowBox[{"Append", "[",
+       RowBox[{
+        RowBox[{"Drop", "[",
+         RowBox[{
+          RowBox[{"FileNameSplit", "@",
+           RowBox[{"NotebookDirectory", "[", "]"}]}], ",",
+          RowBox[{"-", "2"}]}], "]"}], ",",
+        "\"\<build_linux/libCoolProp.so\>\""}], "]"}], "]"}], ",",
+     "\[IndentingNewLine]", "\t\t\t",
+     RowBox[{"FileNameJoin", "[",
+      RowBox[{"{",
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",",
+        "\"\<CoolProp/LibraryResources/Linux-x86-64/libCoolProp.so\>\""}],
+       "}"}], "]"}], ",",
+     RowBox[{"OverwriteTarget", "->", "True"}]}], "]"}]}],
+  "\[IndentingNewLine]", "]"}]], "Input"]
 }]],
 
 Cell[CellGroupData[{
