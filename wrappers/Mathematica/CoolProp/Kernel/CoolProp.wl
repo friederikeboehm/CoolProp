@@ -212,6 +212,11 @@ ASBackendName::usage = "Returns the backend used for the AbstractState.
 ASBackendName[handle]
 	handle: integer handle assigned by ASFactory";
 
+(* For Windows systems, these three libraries are not on every machine, so they are included in the paclet and need to be loaded before loading any CoolProp function. *)
+If[$SystemID == "Windows-x86-64", 
+	LibraryLoad["libwinpthread-1"];
+	LibraryLoad["libgcc_s_seh-1"];
+	LibraryLoad["libstdc++-6"];]
 	
 Begin["`Private`"]
 

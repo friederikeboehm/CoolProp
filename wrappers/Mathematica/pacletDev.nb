@@ -2,28 +2,85 @@
 
 (* Beginning of Notebook Content *)
 Notebook[{
-Cell[BoxData[
- RowBox[{"PacletDirectoryLoad", "@",
-  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input"],
 
-Cell[BoxData[
- RowBox[{"PacletDirectoryUnload", "@",
-  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input"],
+Cell[CellGroupData[{
+Cell["Load/Unload PacletDirectory ", "Section"],
+
+Cell["Use this for development", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Load", "Subsection"],
 
 Cell[BoxData[
  RowBox[{"PacletFind", "[", "\"\<CoolProp\>\"", "]"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"Needs", "[", "\"\<PacletTools`\>\"", "]"}]], "Input"],
+ RowBox[{"PacletDirectoryLoad", "@",
+  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"PacletFind", "[", "\"\<CoolProp\>\"", "]"}]], "Input"]
+}]],
+
+Cell[CellGroupData[{
+
+Cell["Unload", "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"PacletDirectoryUnload", "@",
+  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input"]
+}]]
+}]],
+
+Cell[CellGroupData[{
+
+Cell["Build Paclet", "Section"],
+
+Cell["\<\
+Copy latest compilation of libCoolProp.dll to paclet directory\
+\>", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
+ RowBox[{"If", "[",
+  RowBox[{
+   RowBox[{"$SystemID", "==", "\"\<Windows-x86-64\>\""}], ",",
+   "\[IndentingNewLine]", "\t",
+   RowBox[{"CopyFile", "[", "\[IndentingNewLine]", "\t\t",
+    RowBox[{
+     RowBox[{"FileNameJoin", "[",
+      RowBox[{"Append", "[",
+       RowBox[{
+        RowBox[{"Drop", "[",
+         RowBox[{
+          RowBox[{"FileNameSplit", "@",
+           RowBox[{"NotebookDirectory", "[", "]"}]}], ",",
+          RowBox[{"-", "2"}]}], "]"}], ",", "\"\<build/libCoolProp.dll\>\""}],
+        "]"}], "]"}], ",", "\[IndentingNewLine]", "\t\t",
+     RowBox[{"FileNameJoin", "[",
+      RowBox[{"{",
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",",
+        "\"\<CoolProp/LibraryResources/Windows-x86-64/libCoolProp.dll\>\""}],
+       "}"}], "]"}], ",", "\[IndentingNewLine]", "\t\t",
+     RowBox[{"OverwriteTarget", " ", "->", " ", "True"}]}],
+    "\[IndentingNewLine]", "\t ", "]"}]}], "\[IndentingNewLine]",
+  "]"}]], "Input"]
+}]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Needs", "[", "\"\<PacletTools`\>\"", "]"}], "\n",
  RowBox[{"PacletBuild", "[",
   RowBox[{
    RowBox[{
     RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<CoolProp\>\""}], ",",
-   RowBox[{"OverwriteTarget", " ", "->", " ", "True"}]}], " ", "]"}]], "Input"]
+   RowBox[{"OverwriteTarget", " ", "->", " ", "True"}]}], " ",
+  "]"}]}], "Input"]
+}]]
 }]]
 }]
 (* End of Notebook Content *)

@@ -1,4 +1,4 @@
 CoolProp/build/CoolProp
-CoolProp/LibraryResources/Windows*/lib*
+CoolProp/LibraryResources/Windows*/libCoolProp.dll
 CoolProp/LibraryResources/Linux*/lib*
 CoolProp/LibraryResources/Mac*/lib*
