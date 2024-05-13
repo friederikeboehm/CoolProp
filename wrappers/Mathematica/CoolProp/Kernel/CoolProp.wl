@@ -59,7 +59,7 @@
 (*"Low-Level Access: AbstractState" contains functions to interact with the low-level interface by using AbstractStates. Consult CoolProp Documentation for explanation. *)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Package Head*)
 
 
@@ -227,6 +227,10 @@ ASReadPhaseEnvelopeData[handle, length:500, numberOfFluids:10]
 ASBackendName::usage = "Returns the backend used for the AbstractState.
 ASBackendName[handle]
 	handle: integer handle assigned by ASFactory";
+ASFugacity::usage = "Return the fugacity of the i-th component of the mixture. 
+ASFugacity[handle, index]
+	handle: integer handle assigned by ASFactory
+	param:  The index of the component whose fugycity is read";
 
 (* For Windows systems, these three libraries are not on every machine, so they are included in the paclet and need to be loaded before loading any CoolProp function. *)
 If[$SystemID == "Windows-x86-64", 
@@ -322,7 +326,7 @@ legalTypeSetBufferLength = {"String", "Integer"};
 SetBufferLength[bufferName_, bufferLength_] := CheckTypes[SetBufferLength, {bufferName, bufferLength}, legalTypeSetBufferLength]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Direct Functions*)
 
 
@@ -515,7 +519,7 @@ legalTypeHAPropsSI = {"String","String","Real","String","Real","String","Real"};
 HAPropsSI[param_, name1_, value1_, name2_, value2_, name3_, value3_] := CheckTypes[HAPropsSI, {param, name1, value1, name2, value2, name3, value3}, legalTypeHAPropsSI]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*SetReferenceState*)
 
 
@@ -566,7 +570,7 @@ legalTypeSetReferenceStateD = {"String", "Real", "Real", "Real", "Real"};
 SetReferenceState[fluid_, temperature_, rhoMolar_, hMolar0_, sMolar0_] := CheckTypes[SetReferenceState, {param, fluid}, legalTypeSetReferenceStateD]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Information Functions*)
 
 
@@ -1279,6 +1283,38 @@ legalTypeASBackendName = {"Integer"};
 
 
 ASBackendName[index_] := CheckTypes[ASBackendName, {index}, legalTypeASBackendName]
+
+
+(* ::Subsection::Closed:: *)
+(*ASFugacity*)
+
+
+(* ::Text:: *)
+(*ASFugacity gives the value for the parameter for the set State.*)
+
+
+ASFugacityfunc = LibraryFunctionLoad["libCoolProp","AbstractState_get_fugacity",{Integer, Integer}, Real];
+
+
+SyntaxInformation[ASFugacity] = {"ArgumentsPattern" -> {_,_}};
+
+
+ASFugacity[handle_Integer, index_Integer] :=
+	Module[
+		{
+			result = ASFugacityfunc[handle, index]
+		},
+		If[Or[result === Infinity, result === -Infinity, result === Indeterminate],
+			ASFugacity::libraryFunctionError = GetGlobalParamString["errstring"]; Message[ASFugacity::libraryFunctionError]; $Failed,
+			result
+		]
+	];
+
+
+legalTypeASFugacity = {"Integer", "Integer"};
+
+
+ASFugacity[handle_, index_] := CheckTypes[ASFugacity, {handle, index}, legalTypeASFugacity]
 
 
 (* ::Section:: *)

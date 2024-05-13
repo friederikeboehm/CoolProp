@@ -3,7 +3,7 @@
 PacletObject[
     <|
         "Name" -> "CoolProp",
-        "Version" -> "0.0.5",
+        "Version" -> "0.0.6",
         "WolframVersion" -> "12.1+",
         "Extensions" ->
             {

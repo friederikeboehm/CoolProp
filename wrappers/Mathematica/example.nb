@@ -244,17 +244,23 @@ Cell[BoxData[
    "1000000", ",", " ", "300"}], "]"}]], "Input"]
 }]],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"ASSetFractions", "[",
   RowBox[{"0", ",", " ",
    RowBox[{"{",
-    RowBox[{"0.5", ",", "0.5"}], "}"}]}], "]"}]], "Input"],
+    RowBox[{"0.5", ",", "0.5"}], "}"}]}], "]"}]], "Input"]
+}]],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ASUpdate", "[",
   RowBox[{"0", ",",
    RowBox[{"GetInputPairIndex", "[", "\"\<PT_INPUTS\>\"", "]"}], ",", " ",
-   "1000000", ",", " ", "300"}], "]"}]], "Input"],
+   "1000000", ",", " ", "300"}], "]"}]], "Input"]
+}]],
 
 Cell[CellGroupData[{
 
@@ -264,11 +270,14 @@ Cell[BoxData[
    RowBox[{"GetParamIndex", "@", "\"\<Hmolar\>\""}]}], "]"}]], "Input"]
 }]],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"ASUpdate", "[",
   RowBox[{"0", ",", " ",
    RowBox[{"GetInputPairIndex", "[", "\"\<PQ_INPUTS\>\"", "]"}], ",", " ",
-   "100000", ",", "0.4"}], "]"}]], "Input"],
+   "100000", ",", "0.4"}], "]"}]], "Input"]
+}]],
 
 Cell[CellGroupData[{
 
@@ -308,11 +317,14 @@ Cell[BoxData[{
   RowBox[{"0", ",", " ", "\"\<phase_gas\>\""}], "]"}]}], "Input"]
 }]],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[{
  RowBox[{"ASBuildPhaseEnvelope", "[",
   RowBox[{"0", ",", "\"\<none\>\""}], "]"}], "\[IndentingNewLine]",
  RowBox[{"ASBuildPhaseEnvelope", "[",
-  RowBox[{"0", ",", "\"\<veryfine\>\""}], "]"}]}], "Input"],
+  RowBox[{"0", ",", "\"\<veryfine\>\""}], "]"}]}], "Input"]
+}]],
 
 Cell[CellGroupData[{
 
@@ -328,8 +340,11 @@ Cell[BoxData[
  RowBox[{"ASBackendName", "@", "0"}]], "Input"]
 }]],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"ASFree", "@", "0"}]], "Input"]
+}]]
 }]]
 }]],
 
@@ -497,6 +512,17 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ASKeyedOutput", "[",
   RowBox[{"handle", ",", " ", "p"}], "]"}]], "Input"]
+}]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ASFugacity", "[",
+    RowBox[{"handle", ",", "#"}], "]"}], " ", "&"}], "/@", " ",
+  RowBox[{"Range", "[",
+   RowBox[{"0", ",", "2"}], "]"}]}]], "Input"]
 }]]
 }]],
 

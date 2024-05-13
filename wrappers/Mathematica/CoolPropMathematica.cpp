@@ -1391,3 +1391,33 @@ extern "C" DLLEXPORT int AbstractState_backend_name(WolframLibraryData libData, 
 
     return LIBRARY_NO_ERROR;
 }
+
+
+/*
+    AbstractState_get_fugacity( WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+
+Return the fugacity of the i-th component of the mixture. 
+
+# Arguments
+* `handle` The integer handle for the state class stored in memory
+* `i`      The index of the component whose fugycity is read
+*/
+extern "C" DLLEXPORT int AbstractState_get_fugacity(WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res) {
+
+    strcpy(message_buffer, "");
+
+    if (Argc != 2) return LIBRARY_FUNCTION_ERROR;
+
+    long handle = MArgument_getInteger(Args[0]);
+    long i = MArgument_getInteger(Args[1]);
+
+    double val = AbstractState_get_fugacity(handle, i, errcode, message_buffer, buffer_length);
+
+    if (*errcode != 0) {
+        CoolProp::set_error_string(message_buffer);
+    }
+
+    MArgument_setReal(Res, val);
+
+    return LIBRARY_NO_ERROR;
+}
