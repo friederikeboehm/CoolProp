@@ -1,0 +1,29 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"PacletDirectoryLoad", "@",
+  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"PacletDirectoryUnload", "@",
+  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"PacletFind", "[", "\"\<CoolProp\>\"", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<PacletTools`\>\"", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"PacletBuild", "[",
+  RowBox[{
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<CoolProp\>\""}], ",",
+   RowBox[{"OverwriteTarget", " ", "->", " ", "True"}]}], " ", "]"}]], "Input"]
+}]]
+}]
+(* End of Notebook Content *)

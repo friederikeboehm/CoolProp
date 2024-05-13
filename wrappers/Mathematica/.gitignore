@@ -1,0 +1,4 @@
+CoolProp/build/CoolProp
+CoolProp/LibraryResources/Windows*/lib*
+CoolProp/LibraryResources/Linux*/lib*
+CoolProp/LibraryResources/Mac*/lib*

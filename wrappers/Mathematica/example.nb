@@ -44,9 +44,12 @@ Cell[BoxData[{
  RowBox[{"LibraryFunctionUnload", "[", "HAPropsSI", "]"}]}], "Input"]
 }]],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[{
  RowBox[{"Remove", "@", "Global`PropsSI"}], "\[IndentingNewLine]",
  RowBox[{"Remove", "@", "Global`HAPropsSI"}]}], "Input"]
+}]]
 }]],
 
 Cell[TextData[StyleBox["CoolProp Package", "Title"]], "Section"],
@@ -55,11 +58,15 @@ Cell[CellGroupData[{
 
 Cell["Load Package", "Section"],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
- RowBox[{"Get", "[",
-  RowBox[{
-   RowBox[{"NotebookDirectory", "[", "]"}], "<>", " ",
-   "\"\<CoolProp.wl\>\""}], "]"}]], "Input"],
+ RowBox[{"PacletDirectoryLoad", "@",
+  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input"]
+}]],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<CoolProp`\>\"", "]"}]], "Input"],
 
 Cell["\<\
 ?\[CloseCurlyDoubleQuote]CoolProp`*\[CloseCurlyDoubleQuote] lists all \
