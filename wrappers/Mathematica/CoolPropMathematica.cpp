@@ -117,6 +117,79 @@ extern "C" DLLEXPORT int CreateMatrix(WolframLibraryData libData, mint Argc, MAr
     return LIBRARY_NO_ERROR;
 }
 
+
+/*
+    set_reference_state(ref::AbstractString, reference_state::AbstractString)
+
+Set the reference state based on a string representation.
+
+#Arguments
+* `fluid::AbstractString`	The name of the fluid (Backend can be provided like "REFPROP::Water", or if no backend is provided, "HEOS" is the assumed backend)
+* `reference_state::AbstractString`	The reference state to use, one of:
+
+Reference State |	Description
+:---------------|:-------------------------------------
+"IIR"	          |h = 200 kJ/kg, s=1 kJ/kg/K at 0C saturated liquid
+"ASHRAE"        |h = 0, s = 0 @ -40C saturated liquid
+"NBP"	          |h = 0, s = 0 @ 1.0 bar saturated liquid
+"DEF"	          |Reset to the default reference state for the fluid
+"RESET"	        |Remove the offset
+
+#Ref
+set_reference_stateS(const std::string& FluidName, const std::string& reference_state)
+
+#Note
+The changing of the reference state should be part of the initialization of your program, and it is not recommended to change the reference state during the course of making calculations
+
+*/
+extern "C" DLLEXPORT int set_reference_stateS(WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res) {
+    if (Argc != 2) return LIBRARY_FUNCTION_ERROR;
+
+    char* FluidName = MArgument_getUTF8String(Args[0]);
+    char* ReferenceState = MArgument_getUTF8String(Args[1]);
+
+    long val = set_reference_stateS(FluidName, ReferenceState);
+
+    libData->UTF8String_disown(FluidName);
+    libData->UTF8String_disown(ReferenceState);
+
+    MArgument_setInteger(Res, val);
+
+    return LIBRARY_NO_ERROR;
+}
+
+/*   
+set_reference_state(fluid::AbstractString, T::Real, rhomolar::Real, hmolar0::Real, smolar0::Real)
+
+Set the reference state based on a thermodynamic state point specified by temperature and molar density.
+
+#Arguments
+* `fluid::AbstractString`	The name of the fluid
+* `T::Real`	Temperature at reference state [K]
+* `rhomolar::Real`	Molar density at reference state [mol/m^3]
+* `hmolar0::Real`	Molar enthalpy at reference state [J/mol]
+* `smolar0::Real`	Molar entropy at reference state [J/mol/K]
+*/
+
+extern "C" DLLEXPORT int set_reference_stateD(WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res) {
+    if (Argc != 5) return LIBRARY_FUNCTION_ERROR;
+
+    char* FluidName = MArgument_getUTF8String(Args[0]);
+    double temperature = MArgument_getReal(Args[1]);
+    double rhomolar = MArgument_getReal(Args[2]);
+    double hmolar0 = MArgument_getReal(Args[3]);
+    double smolar0 = MArgument_getReal(Args[4]);
+
+    long val = set_reference_stateD(FluidName, temperature, rhomolar, hmolar0, smolar0);
+
+    libData->UTF8String_disown(FluidName);
+
+    MArgument_setInteger(Res, val);
+
+    return LIBRARY_NO_ERROR;
+}
+
+
 extern "C" DLLEXPORT int Props1SI(WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res) {
     if (Argc != 2) return LIBRARY_FUNCTION_ERROR;
 

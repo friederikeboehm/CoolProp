@@ -114,6 +114,22 @@ HAPropsSI[param, name1, value1, name2, value2, name3, value3]
 	value2: value for name2
 	name3: third input variable name
 	value3: value for name3";
+SetReferenceState::usage = "Set the reference state based on a string representation.
+SetReferenceState[fluid, referenceState]
+	fluid: name of fluid
+	referenceState: 
+		\"IIR\" \th = 200 kJ/kg, s=1 kJ/kg/K at 0C saturated liquid
+		\"ASHRAE\" \th = 0, s = 0 @ -40C saturated liquid
+		\"NBP\" \th = 0, s = 0 @ 1.0 bar saturated liquid
+		\"DEF\" \tReset to the default reference state for the fluid
+		\"RESET\" \tRemove the offset 
+Set the reference state based on a thermodynamic state point specified by temperature and molar density 
+SetReferenceState[fluid, temperature, rhoMolar, hMolar0, sMolar0]
+	fluid: name of fluid 
+	temperature: Temperature at reference state [K]
+	rhoMolar: Molar density at reference state [mol/m^3]
+	hMolar0: Molar enthalpy at reference state [J/mol]
+	sMolar0: Molar entropy at reference state [J/mol/K]";
 
 GetGlobalParamString::usage = "Get a globally-defined string, one of \"version\", \"errstring\", \"warnstring\", \"gitrevision\", \"FluidsList\", \"fluids_list\", \"parameter_list\",\"predefined_mixtures\".
 GetGlobalParamString[param]
@@ -497,6 +513,57 @@ legalTypeHAPropsSI = {"String","String","Real","String","Real","String","Real"};
 
 
 HAPropsSI[param_, name1_, value1_, name2_, value2_, name3_, value3_] := CheckTypes[HAPropsSI, {param, name1, value1, name2, value2, name3, value3}, legalTypeHAPropsSI]
+
+
+(* ::Subsection:: *)
+(*SetReferenceState*)
+
+
+SetReferenceStateSfunc = LibraryFunctionLoad["libCoolProp", "set_reference_stateS", {"UTF8String", "UTF8String"}, Integer];
+
+
+SetReferenceStateDfunc = LibraryFunctionLoad["libCoolProp", "set_reference_stateD", {"UTF8String", Real, Real, Real, Real}, Integer];
+
+
+(*SyntaxInformation[SetReferenceStateS] = {"ArgumentsPattern" -> {_,_}}; *)
+
+
+SetReferenceState[fluid_String, referenceState_String] :=
+	Module[
+		{
+			result = SetReferenceStateSfunc[fluid, referenceState]
+		},		
+		If[result == 0,
+			SetReferenceState::libraryFunctionError = GetGlobalParamString["errstring"]; Message[SetReferenceState::libraryFunctionError]; $Failed
+		]
+	];
+
+
+SetReferenceState[fluid_String, temperature_?NumericQ, rhoMolar_?NumericQ, hMolar0_?NumericQ, sMolar0_?NumericQ] :=
+	Module[
+		{
+			result = SetReferenceStateDfunc[fluid, temperature, rhoMolar, hMolar0, sMolar0]
+		},		
+		If[result == 0,
+			SetReferenceState::libraryFunctionError = GetGlobalParamString["errstring"]; Message[SetReferenceState::libraryFunctionError]; $Failed
+		]
+	];
+
+
+(* ::Text:: *)
+(*legalTypeSetReferenceStateS contains the types, the arguments for SetReferenceStateS should have. "Real" is used, but they could be Integers and Reals. CheckType uses NumericQ to check if they are either one of those.*)
+
+
+legalTypeSetReferenceStateS = {"String", "String"};
+
+
+SetReferenceStateS[fluid_, referenceState_] := CheckTypes[SetReferenceState, {param, fluid}, legalTypeSetReferenceStateS]
+
+
+legalTypeSetReferenceStateD = {"String", "Real", "Real", "Real", "Real"};
+
+
+SetReferenceState[fluid_, temperature_, rhoMolar_, hMolar0_, sMolar0_] := CheckTypes[SetReferenceState, {param, fluid}, legalTypeSetReferenceStateD]
 
 
 (* ::Section:: *)
